@@ -31,17 +31,32 @@ public class Hammurabi {
         // declare local variables here: grain, population, etc.
         // statements go after the declartions
         int population = 100;
-        int bushelsGrain = 2000;
+        int bushels = 2000;
         int acres = 1000;
         int landValue = 19;
         int deaths = 0;
-        int price = 0;
+        int price = 19;
         int year = 0;
 
 
-        System.out.println("How many acres would you like to purchase?: "); // value of acre input
+        while (year <= 10) {
+
+
+
+
+
+
+            bushels = rand.nextInt(32 - 17 + 1) + 17;
+            year++;
+        }
+        // This goes at the end of the loop
+
+
+        // PRICE IS 17 to 23
+
 
         //Need the method to take in int statements
+        int acresBought = askHowManyAcresToBuy(1,2);
 
 
         // Start of the game
@@ -50,12 +65,18 @@ public class Hammurabi {
             // - 1000 acres of land
             // - Land value is 19 bushels/acre
     }
-    public int askHowManyAcresToBuy (int price, int bushesl) {
+    public int askHowManyAcresToBuy (int price, int bushels) {
         // ask how many acres to buy
         // if player doesnt have enough to buy acres = return "cannot buy statement"
         // int brushel -> get acres
         // return back acres increased to the original amount
         // if no purchases -> the case of 0 then return the original amount needed
+        int price =
+        int acresToBuy;
+        acresToBuy = getNumber("How many acres would you like to purchase?: "); // value of acre input
+
+
+
 
         // need integer response to the question
 
