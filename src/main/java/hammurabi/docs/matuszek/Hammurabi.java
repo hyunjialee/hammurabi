@@ -103,6 +103,8 @@ public class Hammurabi {
             // Generates new price of the year 17-23 price
             year++;
         }
+
+        System.out.println(finalSummary(year,  deaths,  immigrant,  population,  bushels,  bushelsPerAcre,  ratDestory,  acresOwned,  price));
         // This goes at the end of the loop
 
 
