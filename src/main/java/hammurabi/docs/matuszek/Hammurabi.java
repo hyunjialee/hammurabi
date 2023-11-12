@@ -284,7 +284,5 @@ public class Hammurabi {
                             "    The city owns " + acresOwned + " acres of land.\n" +
                             "    Land is currently worth " + price + " bushels per acre.\n" +
                             " =============================================================================\n";
-
-        // need to update based on how well player did at the end of the year
     }
 }
