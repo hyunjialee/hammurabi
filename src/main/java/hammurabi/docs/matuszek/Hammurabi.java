@@ -46,7 +46,6 @@ public class Hammurabi {
 
 
 
-
             // if player buys -> do not sell
             // else if player doesnt buy -> sell
 
@@ -89,7 +88,11 @@ public class Hammurabi {
             bushels -= ratDestory;
 
 
+
+
             System.out.println(printSummary(year,  deaths,  immigrant,  population,  bushels,  bushelsPerAcre,  ratDestory,  acresOwned,  price));
+
+
 
 
             price = newCostOfLand();
@@ -264,15 +267,23 @@ public class Hammurabi {
     }
 
     public String finalSummary (int year, int deaths, int immigrant, int population, int bushels, int bushelsPerAcre, int ratDestory, int acresOwned, int price){
-        return "O great Hammurabi!\n" +
-                "    You are in year " + year + " of your ten year rule.\n" +
-                "    In the previous year" + deaths + " people starved to death.\n" +
-                "    In the previous year " + immigrant + " people entered the kingdom.\n" +
-                "    The population is now " + population + ".\n" +
-                "    We harvested " + bushels + " bushels at " + bushelsPerAcre + " bushels per acre.\n" +
-                "    Rats destroyed " + ratDestory + " bushels, leaving " + bushels + " bushels in storage.\n" +
-                "    The city owns " + acresOwned + " acres of land.\n" +
-                "    Land is currently worth " + price + " bushels per acre.";
+                if (deaths >= population * .66 || acresOwned/population >= 7) {
+                    return "You have been impeached and thrown out of office for letting your people starve";
+                } else if (deaths >= population * .90 || acresOwned/population >= 9) {
+                    return "You have completed a Heavy-handed performance";
+                } else if (deaths >= population * .97 || acresOwned/population >= 10){
+                    return "Your performance could have been better";
+                } else
+                    return "O great Hammurabi!\n" +
+                            "    You are in year " + year + " of your ten year rule.\n" +
+                            "    In the previous year" + deaths + " people starved to death.\n" +
+                            "    In the previous year " + immigrant + " people entered the kingdom.\n" +
+                            "    The population is now " + population + ".\n" +
+                            "    We harvested " + bushels + " bushels at " + bushelsPerAcre + " bushels per acre.\n" +
+                            "    Rats destroyed " + ratDestory + " bushels, leaving " + bushels + " bushels in storage.\n" +
+                            "    The city owns " + acresOwned + " acres of land.\n" +
+                            "    Land is currently worth " + price + " bushels per acre.\n" +
+                            " =============================================================================\n";
 
         // need to update based on how well player did at the end of the year
     }
