@@ -70,7 +70,7 @@ public class Hammurabi {
             int starvedDeaths = starvationDeaths(population, bushelsUsedToFeed);;
 
             if (uprising(population, starvedDeaths)){
-                System.out.println("AN UPRISING IS HAPPENING, GOODBYE RULER");
+                System.out.println("\nAN UPRISING IS HAPPENING, GOODBYE RULER");
                 break;
             }
             deaths = starvedDeaths + plagueDeaths;
@@ -97,7 +97,7 @@ public class Hammurabi {
 
             price = newCostOfLand();
 
-            System.out.println("======================================================\n======================================================\n======================================================\n");
+            System.out.println("\n======================================================\n======================================================\n======================================================\n");
 
 
             // Generates new price of the year 17-23 price
@@ -270,13 +270,13 @@ public class Hammurabi {
 
     public String finalSummary (int year, int deaths, int immigrant, int population, int bushels, int bushelsPerAcre, int ratDestory, int acresOwned, int price){
                 if (deaths >= population * .66 || acresOwned/population >= 7) {
-                    return "You have been impeached and thrown out of office for letting your people starve";
+                    return "\nYou have been impeached and thrown out of office for letting your people starve";
                 } else if (deaths >= population * .90 || acresOwned/population >= 9) {
-                    return "You have completed a Heavy-handed performance";
+                    return "\nYou have completed a Heavy-handed performance";
                 } else if (deaths >= population * .97 || acresOwned/population >= 10){
-                    return "Your performance could have been better";
+                    return "\nYour performance could have been better";
                 } else
-                    return "O great Hammurabi!\n" +
+                    return "\nO great Hammurabi!\n" +
                             "    You are in year " + year + " of your ten year rule.\n" +
                             "    In the previous year" + deaths + " people starved to death.\n" +
                             "    In the previous year " + immigrant + " people entered the kingdom.\n" +
