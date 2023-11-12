@@ -66,11 +66,14 @@ public class Hammurabi {
             int plantedAcres = askHowManyAcresToPlant(acresOwned, population, bushels);
 
             int plagueDeaths = plagueDeaths(population);
+            System.out.println("\n" + plagueDeaths + " have died from the plague.");
 
             int starvedDeaths = starvationDeaths(population, bushelsUsedToFeed);;
 
+            System.out.println("\n"+ starvedDeaths + " have died from starvation.");
+
             if (uprising(population, starvedDeaths)){
-                System.out.println("\nAN UPRISING IS HAPPENING, GOODBYE RULER");
+                System.out.println("\nAN UPRISING IS HAPPENING, GOODBYE RULER\n");
                 break;
             }
             deaths = starvedDeaths + plagueDeaths;
@@ -79,12 +82,17 @@ public class Hammurabi {
             if (starvedDeaths == 0){
                 immigrant = immigrants(population, acresOwned, bushels);
                 population +=  immigrant;
+                System.out.println("\n" + immigrant + "have came into the city!\n");
             }
 
             int bushelsHarvested= harvest(plantedAcres);
             bushels += bushelsHarvested;
 
+            System.out.println("\n" + bushelsHarvested + " bushels have been harvested.\n");
+
             ratDestory = grainEatenByRats(bushels);
+
+            System.out.println("\n" + ratDestory + " bushels have been eaten by rats. \n");
             bushels -= ratDestory;
 
 
@@ -96,6 +104,8 @@ public class Hammurabi {
 
 
             price = newCostOfLand();
+
+            System.out.println("\nThe new price for land next year is " + price);
 
             System.out.println("\n======================================================\n======================================================\n======================================================\n");
 
@@ -127,8 +137,14 @@ public class Hammurabi {
         int totalAmountOfBushels = Integer.MAX_VALUE;
 
         while (totalAmountOfBushels > bushels){
-            acresToBuy = getNumber("How many acres would you like to purchase? ");
+            acresToBuy = getNumber("\nHow many acres would you like to purchase? ");
+
             totalAmountOfBushels = acresToBuy * price;
+
+            if (totalAmountOfBushels > bushels) {
+                System.out.println("The amount is too large! You have " + bushels + " bushels, but you are trying to purchase " + totalAmountOfBushels + " bushels\n");
+            }
+
 
 //            if (totalAmountOfBushels > bushels){
 //                System.out.println("You do not have enough bushels. You only have " + bushels + ". This costs " + totalAmountOfBushels);
@@ -147,6 +163,10 @@ public class Hammurabi {
         while (acresOwned < acresToSell) {
             acresToSell = getNumber("How many acres would you like to sell? ");
 
+            if(acresOwned < acresToSell) {
+                System.out.println("The amount is too large. You have " + acresOwned + " acres. You cannot sell " + acresToSell + " acres.\n");
+            }
+
         }
 
         //similar to the buy method but subtract the acres
@@ -159,6 +179,10 @@ public class Hammurabi {
 
         while (grains > bushels) {
             grains = getNumber("How many grains do you want to use to feed your population? ");
+
+            if (grains > bushels){
+                System.out.println("You do not have enough bushels to feed your people. \nCurrent bushels: " + bushels + "\n How much bushels you want to feed: " + grains);
+            }
         }
         // number need to survive on grain for people
         // you cant feed more grain than you own
@@ -173,9 +197,17 @@ public class Hammurabi {
         while (acresToPlant > acresOwned) {
             acresToPlant = getNumber("How many acres would you like to plant? ");
 
+
             if (acresToPlant * 2 > bushels && population * 10  < acresToPlant){
+                System.out.println("\nYou are planting more than you own. \n Acres Owned: " + acresOwned + ".\n Acres needed: " + acresToPlant);
+
+                System.out.println("\n Current Population: " + population + ".\n Population needed: " + acresToPlant/10);
+
+                System.out.println("\n Current Bushels: " + bushels + "\n Bushels needed: " + acresToPlant/2 + "\n");
+
                 acresToPlant = Integer.MAX_VALUE;
             }
+
         }
         return acresToPlant;
 
@@ -276,7 +308,7 @@ public class Hammurabi {
                 } else if (deaths >= population * .97 || acresOwned/population >= 10){
                     return "\nYour performance could have been better";
                 } else
-                    return "\nO great Hammurabi!\n" +
+                    return "\nO great Hammurabi! You have completed the game.\n" +
                             "    You are in year " + year + " of your ten year rule.\n" +
                             "    In the previous year" + deaths + " people starved to death.\n" +
                             "    In the previous year " + immigrant + " people entered the kingdom.\n" +
