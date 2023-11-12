@@ -1,4 +1,4 @@
-package hammurabi;
+package hammurabi.docs.matuszek;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
@@ -43,8 +43,6 @@ public class Hammurabi {
             int acresBought = askHowManyAcresToBuy(price, bushels);
 
             int acresSold = askHowManyAcresToSell(acresOwned);
-
-
 
 
 
@@ -159,7 +157,7 @@ public class Hammurabi {
     }
 
     public int immigrants (int population, int acresOwned, int grainInStorage){
-        return (20 * acresOwned + grainInStorage/ ((100 * population) + 1));
+        return ((20 * acresOwned + grainInStorage)/ (100 * population)) + 1;
     }
     public int harvest (int acres, int bushelsUsedAsSeed) {
         int x = rand.nextInt(6 ) + 1;
