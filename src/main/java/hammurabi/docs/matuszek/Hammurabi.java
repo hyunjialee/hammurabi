@@ -33,7 +33,6 @@ public class Hammurabi {
         int population = 100;
         int bushels = 2800;
         int acresOwned = 1000;
-        int landValue = 19;
         int deaths = 0;
         int price = 19;
         int year = 1;
@@ -43,15 +42,7 @@ public class Hammurabi {
 
 
         while (year <= 10) {
-            System.out.println("O great Hammurabi!\n" +
-                    "    You are in year " + year + " of your ten year rule.\n" +
-                    "    In the previous year" + deaths + " people starved to death.\n" +
-                    "    In the previous year " + immigrant + " people entered the kingdom.\n" +
-                    "    The population is now " + population + ".\n" +
-                    "    We harvested " + bushels + " bushels at " + bushelsPerAcre + " bushels per acre.\n" +
-                    "    Rats destroyed " + ratDestory + " bushels, leaving " + bushels + " bushels in storage.\n" +
-                    "    The city owns " + acresOwned + " acres of land.\n" +
-                    "    Land is currently worth " + price + " bushels per acre.");
+            System.out.println(printSummary(year,  deaths,  immigrant,  population,  bushels,  bushelsPerAcre,  ratDestory,  acresOwned,  price));
 
 
 
@@ -80,6 +71,7 @@ public class Hammurabi {
             int starvedDeaths = starvationDeaths(population, bushelsUsedToFeed);;
 
             if (uprising(population, starvedDeaths)){
+                System.out.println("AN UPRISING IS HAPPENING, GOODBYE RULER");
                 break;
             }
             deaths = starvedDeaths + plagueDeaths;
@@ -97,7 +89,13 @@ public class Hammurabi {
             bushels -= ratDestory;
 
 
+            System.out.println(printSummary(year,  deaths,  immigrant,  population,  bushels,  bushelsPerAcre,  ratDestory,  acresOwned,  price));
+
+
             price = newCostOfLand();
+
+            System.out.println("======================================================\n======================================================\n======================================================\n");
+
 
             // Generates new price of the year 17-23 price
             year++;
@@ -124,7 +122,7 @@ public class Hammurabi {
         int totalAmountOfBushels = Integer.MAX_VALUE;
 
         while (totalAmountOfBushels > bushels){
-            acresToBuy = getNumber("How many acres would you like to purchase?: ");
+            acresToBuy = getNumber("How many acres would you like to purchase? ");
             totalAmountOfBushels = acresToBuy * price;
 
 //            if (totalAmountOfBushels > bushels){
@@ -142,7 +140,7 @@ public class Hammurabi {
         int acresToSell = Integer.MAX_VALUE;
 
         while (acresOwned < acresToSell) {
-            acresToSell = getNumber("How many acres would you like to sell?: ");
+            acresToSell = getNumber("How many acres would you like to sell? ");
 
         }
 
@@ -155,8 +153,7 @@ public class Hammurabi {
         int grains = Integer.MAX_VALUE;
 
         while (grains > bushels) {
-            grains = getNumber("How many people would you like to feed?: ");
-
+            grains = getNumber("How many grains do you want to use to feed your population? ");
         }
         // number need to survive on grain for people
         // you cant feed more grain than you own
@@ -169,7 +166,7 @@ public class Hammurabi {
         int acresToPlant = Integer.MAX_VALUE;
 
         while (acresToPlant > acresOwned) {
-            acresToPlant = getNumber("How many acres would you like to plant?: ");
+            acresToPlant = getNumber("How many acres would you like to plant? ");
 
             if (acresToPlant * 2 > bushels && population * 10  < acresToPlant){
                 acresToPlant = Integer.MAX_VALUE;
@@ -257,7 +254,7 @@ public class Hammurabi {
     public String printSummary(int year, int deaths, int immigrant, int population, int bushels, int bushelsPerAcre, int ratDestory, int acresOwned, int price){
         return "O great Hammurabi!\n" +
                 "    You are in year " + year + " of your ten year rule.\n" +
-                "    In the previous year" + deaths + " people starved to death.\n" +
+                "    In the previous year " + deaths + " people starved to death.\n" +
                 "    In the previous year " + immigrant + " people entered the kingdom.\n" +
                 "    The population is now " + population + ".\n" +
                 "    We harvested " + bushels + " bushels at " + bushelsPerAcre + " bushels per acre.\n" +
@@ -266,9 +263,17 @@ public class Hammurabi {
                 "    Land is currently worth " + price + " bushels per acre.";
     }
 
-    public String finalSummary(){
-        return "";
+    public String finalSummary (int year, int deaths, int immigrant, int population, int bushels, int bushelsPerAcre, int ratDestory, int acresOwned, int price){
+        return "O great Hammurabi!\n" +
+                "    You are in year " + year + " of your ten year rule.\n" +
+                "    In the previous year" + deaths + " people starved to death.\n" +
+                "    In the previous year " + immigrant + " people entered the kingdom.\n" +
+                "    The population is now " + population + ".\n" +
+                "    We harvested " + bushels + " bushels at " + bushelsPerAcre + " bushels per acre.\n" +
+                "    Rats destroyed " + ratDestory + " bushels, leaving " + bushels + " bushels in storage.\n" +
+                "    The city owns " + acresOwned + " acres of land.\n" +
+                "    Land is currently worth " + price + " bushels per acre.";
+
+        // need to update based on how well player did at the end of the year
     }
-
-
 }
