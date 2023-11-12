@@ -32,7 +32,7 @@ public class Hammurabi {
         // statements go after the declartions
         int population = 100;
         int bushels = 2000;
-        int acres = 1000;
+        int acresOwned = 1000;
         int landValue = 19;
         int deaths = 0;
         int price = 19;
@@ -40,23 +40,22 @@ public class Hammurabi {
 
 
         while (year <= 10) {
+            int acresBought = askHowManyAcresToBuy(price, bushels);
+
+            int acresSold = askHowManyAcresToSell(acresOwned);
 
 
 
 
 
 
-            bushels = rand.nextInt(32 - 17 + 1) + 17;
+            price = rand.nextInt(23 - 17 + 1) + 17;
+            // Generates new price of the year 17-23 price
             year++;
         }
         // This goes at the end of the loop
 
 
-        // PRICE IS 17 to 23
-
-
-        //Need the method to take in int statements
-        int acresBought = askHowManyAcresToBuy(1,2);
 
 
         // Start of the game
@@ -70,18 +69,20 @@ public class Hammurabi {
         // if player doesnt have enough to buy acres = return "cannot buy statement"
         // int brushel -> get acres
         // return back acres increased to the original amount
-        // if no purchases -> the case of 0 then return the original amount needed
-        int price =
-        int acresToBuy;
-        acresToBuy = getNumber("How many acres would you like to purchase?: "); // value of acre input
+        // if no purchases -> the case of 0 then return the original amount needed;
+        int acresToBuy = 0;
 
+        int totalAmountOfBushels = Integer.MAX_VALUE;
 
+        while (totalAmountOfBushels > bushels){
+            acresToBuy = getNumber("How many acres would you like to purchase?: ");
+            totalAmountOfBushels = acresToBuy * price;
 
-
-        // need integer response to the question
-
-
-        return 0;
+//            if (totalAmountOfBushels > bushels){
+//                System.out.println("You do not have enough bushels. You only have " + bushels + ". This costs " + totalAmountOfBushels);
+//            }  THIS IS EXTRA STATEMENT -----------------
+        }
+        return acresToBuy;
     }
 
     public int askHowManyAcresToSell(int acresOwned){
@@ -89,31 +90,59 @@ public class Hammurabi {
         // ask how many they want to sell
         // if acresOwned <= acresOfLand able to sell
 
+        int acresToSell = Integer.MAX_VALUE;
+
+        while (acresOwned < acresToSell) {
+            acresToSell = getNumber("How many acres would you like to sell?: ");
+
+        }
+
         //similar to the buy method but subtract the acres
-        return 0;
+        return acresToSell;
     }
 
     public int askHowMuchGrainToFeedPeople(int bushels){
+
+        int grains = Integer.MAX_VALUE;
+
+        while (grains > bushels) {
+            grains = getNumber("How many people would you like to feed?: ");
+
+        }
         // number need to survive on grain for people
         // you cant feed more grain than you own
 
-
-        return 0;
+        return grains;
     }
 
     public int askHowManyAcresToPlant (int acresOwned, int population, int bushels){
 
+        int acresToPlant = Integer.MAX_VALUE;
+
+        while (acresToPlant > acresOwned) {
+            acresToPlant = getNumber("How many acres would you like to plant?: ");
+
+            if (acresToPlant * 2 > bushels && population * 10  < acresToPlant){
+                acresToPlant = Integer.MAX_VALUE;
+            }
+        }
+        return acresToPlant;
+
+        // each person can farm 10 acres
+        // it takes 2 bushels -> 1 acre
         // have enough acres, population, and bushels to plant (AND STATEMENTS)
-        return 0;
     }
-    // for each question do sanity checking, that is test whether the answer is possible and keep asking until you get a possible value
-    // at each question, have a restatement of bushels, acres, population left, how people came to the city
 
     public int plagueDeaths(int population){
+
+        if (rand.nextInt(100) < 15) {
+            return population / 2;
+        }
         return 0;
     }
 
     public int starvationDeaths(int population, int bushelsFedToPeople){
+
         return 0;
     }
 
