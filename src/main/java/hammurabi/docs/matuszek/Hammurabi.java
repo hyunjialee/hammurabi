@@ -31,21 +31,73 @@ public class Hammurabi {
         // declare local variables here: grain, population, etc.
         // statements go after the declartions
         int population = 100;
-        int bushels = 2000;
+        int bushels = 2800;
         int acresOwned = 1000;
         int landValue = 19;
         int deaths = 0;
         int price = 19;
-        int year = 0;
+        int year = 1;
+        int immigrant = 5;
+        int bushelsPerAcre = 3;
+        int ratDestory = 200;
 
 
         while (year <= 10) {
+            System.out.println("O great Hammurabi!\n" +
+                    "    You are in year " + year + " of your ten year rule.\n" +
+                    "    In the previous year" + deaths + " people starved to death.\n" +
+                    "    In the previous year " + immigrant + " people entered the kingdom.\n" +
+                    "    The population is now " + population + ".\n" +
+                    "    We harvested " + bushels + " bushels at " + bushelsPerAcre + " bushels per acre.\n" +
+                    "    Rats destroyed " + ratDestory + " bushels, leaving " + bushels + " bushels in storage.\n" +
+                    "    The city owns " + acresOwned + " acres of land.\n" +
+                    "    Land is currently worth " + price + " bushels per acre.");
+
+
+
+
+            // if player buys -> do not sell
+            // else if player doesnt buy -> sell
+
             int acresBought = askHowManyAcresToBuy(price, bushels);
+            acresOwned += acresBought;
+            bushels -= acresBought * price;
 
-            int acresSold = askHowManyAcresToSell(acresOwned);
+
+            if (acresBought == 0) {
+                int soldAcres = askHowManyAcresToSell(acresOwned);
+                acresOwned -= soldAcres;
+                bushels += soldAcres * price;
+            }
+
+            int bushelsUsedToFeed = askHowMuchGrainToFeedPeople(bushels);
+            bushels -= bushelsUsedToFeed;
+
+            int plantedAcres = askHowManyAcresToPlant(acresOwned, population, bushels);
+
+            int plagueDeaths = plagueDeaths(population);
+
+            int starvedDeaths = starvationDeaths(population, bushelsUsedToFeed);;
+
+            if (uprising(population, starvedDeaths)){
+                break;
+            }
+            deaths = starvedDeaths + plagueDeaths;
+            population -= deaths;
+
+            if (starvedDeaths == 0){
+                immigrant = immigrants(population, acresOwned, bushels);
+                population +=  immigrant;
+            }
+
+            int bushelsHarvested= harvest(plantedAcres);
+            bushels += bushelsHarvested;
+
+            ratDestory = grainEatenByRats(bushels);
+            bushels -= ratDestory;
 
 
-
+            price = newCostOfLand();
 
             // Generates new price of the year 17-23 price
             year++;
@@ -159,12 +211,13 @@ public class Hammurabi {
     public int immigrants (int population, int acresOwned, int grainInStorage){
         return ((20 * acresOwned + grainInStorage)/ (100 * population)) + 1;
     }
-    public int harvest (int acres, int bushelsUsedAsSeed) {
+
+//    public int  harvest (int acres, int bushelsUsedAsSeed)
+    // THIS WAS IN THE README BUT THE TEST CASE TAKES IN ONE PARAMETER.....
+    public int  harvest (int acres) {
         int x = rand.nextInt(6 ) + 1;
 
-        int acresPlanted =  acres - bushelsUsedAsSeed / 2;
-
-        return acresPlanted * x;
+        return acres * x;
     }
 
     public int grainEatenByRats (int bushels){
@@ -200,5 +253,22 @@ public class Hammurabi {
             }
         }
     }
+
+    public String printSummary(int year, int deaths, int immigrant, int population, int bushels, int bushelsPerAcre, int ratDestory, int acresOwned, int price){
+        return "O great Hammurabi!\n" +
+                "    You are in year " + year + " of your ten year rule.\n" +
+                "    In the previous year" + deaths + " people starved to death.\n" +
+                "    In the previous year " + immigrant + " people entered the kingdom.\n" +
+                "    The population is now " + population + ".\n" +
+                "    We harvested " + bushels + " bushels at " + bushelsPerAcre + " bushels per acre.\n" +
+                "    Rats destroyed " + ratDestory + " bushels, leaving " + bushels + " bushels in storage.\n" +
+                "    The city owns " + acresOwned + " acres of land.\n" +
+                "    Land is currently worth " + price + " bushels per acre.";
+    }
+
+    public String finalSummary(){
+        return "";
+    }
+
 
 }
