@@ -49,7 +49,6 @@ public class Hammurabi {
 
 
 
-            price = rand.nextInt(23 - 17 + 1) + 17;
             // Generates new price of the year 17-23 price
             year++;
         }
@@ -142,28 +141,45 @@ public class Hammurabi {
     }
 
     public int starvationDeaths(int population, int bushelsFedToPeople){
+        int totalBushelsNeeded;
+        int totalDed = 0;
+        totalBushelsNeeded = population * 20;
 
-        return 0;
+        if (bushelsFedToPeople < totalBushelsNeeded){
+            totalDed = population - (bushelsFedToPeople / 20);
+        }
+
+
+        return totalDed;
     }
 
     public boolean uprising (int population, int howManyPeopleStarved){
-        return false;
+
+        return howManyPeopleStarved > (population * .45);
     }
 
     public int immigrants (int population, int acresOwned, int grainInStorage){
-        return 0;
+        return (20 * acresOwned + grainInStorage/ ((100 * population) + 1));
     }
     public int harvest (int acres, int bushelsUsedAsSeed) {
-        return 0;
+        int x = rand.nextInt(6 ) + 1;
+
+        int acresPlanted =  acres - bushelsUsedAsSeed / 2;
+
+        return acresPlanted * x;
     }
 
     public int grainEatenByRats (int bushels){
+        int grainsEaten = (rand.nextInt(30 - 10 + 1) + 10);
+
+        if (rand.nextInt(100) < 40) {
+             return bushels * grainsEaten / 100;
+        }
         return 0;
     }
 
     public int newCostOfLand(){
-        // new cost of land ranges from 17 to 23
-        return 0;
+        return rand.nextInt(23 - 17 + 1) + 17;
     }
 
     /**
