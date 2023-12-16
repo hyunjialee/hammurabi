@@ -3,7 +3,7 @@ an ancient (in more ways than one) computer game (text)
 
 ## General idea of the lab
 
-*Hammurabi* is a very old computer game (like about as old as Kris). Your job is to bring it into the 21st century by writing it in Java.
+*Hammurabi* is a very old computer game.
 
 Here are the standard instructions for the game:
 
